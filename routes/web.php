@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// resource() richiama il controller cruds completo
+// il metodo accetta 2 paramentri: tabella server  , 'controller'
+Route::resource('beers','BeerController');
+
+// Route::get('/beers', 'BeersControler@index')->('beers.index');

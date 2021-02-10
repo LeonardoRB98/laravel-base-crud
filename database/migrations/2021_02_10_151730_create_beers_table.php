@@ -13,9 +13,11 @@ class CreateBeersTable extends Migration
      */
     public function up()
     {
+        // crezione colonne tabella, precedemente inizializzata da mysql
+        // link tabella: https://laravel.com/docs/4.2/schema
         Schema::create('beers', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 30);
+            $table->string('nome', 30); //$table->tipologiaDiDato('nomeColonna', quantità caratteri) string equivale al varchar di sql
             $table->string('tipo', 30);
             $table->string('paese', 20);
             $table->string('regione', 20);
