@@ -17,7 +17,7 @@ class BeerController extends Controller
        $beers = Beer::all();
     //    dd($beers);
     //resurces->views->beers->index.blade.php
-        return view('beers/index', ['beers'=>$beers]); // compose('beers')
+        return view('beers.index', ['beers'=>$beers]); // compose('beers')
     }
 
     /**
@@ -27,7 +27,7 @@ class BeerController extends Controller
      */
     public function create()
     {
-        //
+        return view('beers.create');
     }
 
     /**
@@ -37,8 +37,22 @@ class BeerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        // dentro request ricevo i dati del form tramite metodo post
+        $data=$request->all();
+        // $data è un array tradizionale
+        // dd($data);
+        // creo una nuova instanza di Beer
+        $beer = new Beer();
+        // assegno all'atributo nome il valore di $data['nome'](stessivalori del dabase)
+        $beer->nome=$data['nome'];
+        $beer->tipo=$data['tipo'];
+        $beer->paese=$data['paese'];
+        $beer->regione=$data['regione'];
+        $beer->gradazione_alcolica=$data['gradazione_alcolica'];
+        $beer->descrizione=$data['descrizione'];
+        $beer->save();
+        
     }
 
     /**
@@ -47,9 +61,12 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    //come primo argomento ho la classe e come secondo id 
+    public function show(Beer $beer)
+    {   
+        //creo una variabile e gli assegno il primo id della classe Beer
+        // $beer = Beer::find($id);
+        dd($beer);
     }
 
     /**

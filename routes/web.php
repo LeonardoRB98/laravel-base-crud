@@ -21,4 +21,5 @@ Route::get('/', function () {
 // il metodo accetta 2 paramentri: tabella server  , 'controller'
 Route::resource('beers','BeerController');
 
-// Route::get('/beers', 'BeersControler@index')->('beers.index');
+// Route::get('/beers', 'BeersControler@index')->name('beers.index');
+                                                // nome rotta da usare il root all'interno di un href
