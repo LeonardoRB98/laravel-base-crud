@@ -38,6 +38,13 @@ class BeerController extends Controller
      */
     public function store(Request $request)
     {   
+        $validatedData = $request->validate([
+            'nome' => 'required',
+            'tipo' => 'required',
+            'regione' => 'required',
+            'gradazione_alcolica' => 'required',
+            'descrizione' => 'required',
+        ]);
         // dentro request ricevo i dati del form tramite metodo post
         $data=$request->all();
         // $data è un array tradizionale
@@ -51,8 +58,15 @@ class BeerController extends Controller
         $beer->regione=$data['regione'];
         $beer->gradazione_alcolica=$data['gradazione_alcolica'];
         $beer->descrizione=$data['descrizione'];
-        $beer->save();
         
+        // sava $beer nel database
+        $beer->save();
+        // accedo all'oggetto beer ordino per id in ordine discendente, 
+        //predo il primo risultato
+        $newBeer = Beer::orderBy('id', 'DESC')->first();
+        //reindirizzo alla rotta beers/show passandogli come secondo paramaetro
+        // l'ultimo oggetto inserito nel database
+        return redirect()->route('beers.show', $newBeer);
     }
 
     /**
@@ -66,7 +80,7 @@ class BeerController extends Controller
     {   
         //creo una variabile e gli assegno il primo id della classe Beer
         // $beer = Beer::find($id);
-        dd($beer);
+        // dd($beer);
     }
 
     /**

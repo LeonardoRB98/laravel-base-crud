@@ -24,6 +24,7 @@ qui si utilizza yield(agganciare)
         </main>
         
         <footer>
+        @yield('footer-content')
             <p></p>
         </footer>
     </div>

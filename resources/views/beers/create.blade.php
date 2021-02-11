@@ -5,6 +5,15 @@
 @endsection
 
 @section('main-content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
      <!-- action='' è lo scrip di destinazione dei nostri dati inseriti nel form -->
     <form action="{{ route('beers.store') }}" method="POST">
         @method('POST')
@@ -35,5 +44,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Salva</button>
     </form>
+@endsection
+
+@section('footer-content')
+    <h2>Sono il footer</h2>
 @endsection
 

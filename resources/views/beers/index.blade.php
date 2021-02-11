@@ -1,4 +1,9 @@
 @extends('layouts.main')
+
+@section('header-content')
+<h1>Le mie birre</h1>
+@endsection
+
 @section('main-content')
 <table class="table table-dark table-bordered text-center align-middle">
     <thead class="thead-light">
@@ -19,12 +24,12 @@
                 <td>{{$beer->paese}}</td>
                 <td>{{$beer->regione}}</td>
                 <td>{{$beer->gradazione_alcolica}}</td>
-                <td>{{$beer->descrizione}}</td>
                 <td><a href=" {{ route('beers.show', ['beer' => $beer->id] ) }} " class="btn btn-outline-light">MOSTRA</a></td>
             </tr>
         @endforeach
     </tbody>
 </table>
+<a href="{{ route('beers.create') }}" class="btn btn-info ">Aggiungi birra</a>
 @endsection
 
 
