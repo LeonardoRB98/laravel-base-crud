@@ -59,7 +59,7 @@ class BeerController extends Controller
         $beer->gradazione_alcolica=$data['gradazione_alcolica'];
         $beer->descrizione=$data['descrizione'];
         
-        // sava $beer nel database
+        // salva $beer nel database
         $beer->save();
         // accedo all'oggetto beer ordino per id in ordine discendente, 
         //predo il primo risultato
@@ -76,12 +76,9 @@ class BeerController extends Controller
      * @return \Illuminate\Http\Response
      */
     //come primo argomento ho la classe e come secondo id 
-    public function show(Beer $beer)
-    {   
-        //creo una variabile e gli assegno il primo id della classe Beer
-        // $beer = Beer::find($id);
-        // dd($beer);
-    }
+
+
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -89,9 +86,9 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Beer $beer)
     {
-        //
+        return view('beers.edit', compact('beer'));
     }
 
     /**
@@ -101,9 +98,15 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Beer $beer)
+    {   
+        $data = $request->all();
+
+        dd($data);
+        // $data = $request->all();
+        // dd($data);
+        // $beer->update($data);
+        // return redirect()->route('beers.index');
     }
 
     /**
@@ -112,8 +115,11 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Beer $beer)
+    {   
+        dd($beer);
+        $beer->delete();
+
+        return redirect()->route('beers.index');
     }
 }

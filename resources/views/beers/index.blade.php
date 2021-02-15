@@ -25,7 +25,11 @@
                 <td>{{$beer->regione}}</td>
                 <td>{{$beer->gradazione_alcolica}}</td>
                 <td><a href=" {{ route('beers.show', ['beer' => $beer->id] ) }} " class="btn btn-outline-light">MOSTRA</a></td>
+                <td><a href=" {{ route('beers.edit', ['beer' => $beer->id] ) }} " class="btn btn-outline-light">Modifica</a></td>
+                <td><a href=" {{ route('beers.destroy', ['beer' => $beer->id] ) }} " class="btn btn-outline-light">Elimina</a></td>
+                
             </tr>
+            
         @endforeach
     </tbody>
 </table>
