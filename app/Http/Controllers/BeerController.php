@@ -78,7 +78,15 @@ class BeerController extends Controller
     //come primo argomento ho la classe e come secondo id 
 
 
-   
+    public function show(Beer $beer)
+    {   
+        //creo una variabile e gli assegno il primo id della classe Beer
+        // $beer = Beer::find($id);
+        // dd($beer);
+        
+        return view('beers.show', compact('beer'));
+    
+    }
 
     /**
      * Show the form for editing the specified resource.
