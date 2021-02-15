@@ -24,10 +24,13 @@
                 <td>{{$beer->paese}}</td>
                 <td>{{$beer->regione}}</td>
                 <td>{{$beer->gradazione_alcolica}}</td>
-                <td><a href=" {{ route('beers.show', ['beer' => $beer->id] ) }} " class="btn btn-outline-light">MOSTRA</a></td>
-                <td><a href=" {{ route('beers.edit', ['beer' => $beer->id] ) }} " class="btn btn-outline-light">Modifica</a></td>
-                <td><a href=" {{ route('beers.destroy', ['beer' => $beer->id] ) }} " class="btn btn-outline-light">Elimina</a></td>
-                
+                <td><a href=" {{ route('beers.show', $beer->id) }} " class="btn btn-outline-light">MOSTRA</a></td>
+                <td><a href=" {{ route('beers.edit', $beer->id) }} " class="btn btn-outline-light">Modifica</a></td>
+                <form action="{{ route('beers.destroy', $beer['id']) }}" method="post">
+                    @csrf
+                    @method("delete")
+                    <td><button class="btn btn-danger">Elimina</button></td>
+                </form>
             </tr>
             
         @endforeach

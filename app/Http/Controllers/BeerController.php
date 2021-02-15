@@ -5,7 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Beer;
 class BeerController extends Controller
-{
+{   
+    private $beerValidator = [
+            'nome' => 'required',
+            'tipo' => 'required',
+            'regione' => 'required',
+            'gradazione_alcolica' => 'required',
+            'descrizione' => 'required',
+        ];
     /**
      * Display a listing of the resource.
      *
@@ -38,26 +45,22 @@ class BeerController extends Controller
      */
     public function store(Request $request)
     {   
-        $validatedData = $request->validate([
-            'nome' => 'required',
-            'tipo' => 'required',
-            'regione' => 'required',
-            'gradazione_alcolica' => 'required',
-            'descrizione' => 'required',
-        ]);
+        $validatedData = $request->validate($this -> beerValidator);
         // dentro request ricevo i dati del form tramite metodo post
         $data=$request->all();
         // $data è un array tradizionale
         // dd($data);
         // creo una nuova instanza di Beer
         $beer = new Beer();
+        // riempie in automatico i dati passati come fillable nel model
+        $beer->fill($data);
         // assegno all'atributo nome il valore di $data['nome'](stessivalori del dabase)
-        $beer->nome=$data['nome'];
-        $beer->tipo=$data['tipo'];
-        $beer->paese=$data['paese'];
-        $beer->regione=$data['regione'];
-        $beer->gradazione_alcolica=$data['gradazione_alcolica'];
-        $beer->descrizione=$data['descrizione'];
+        // $beer->nome=$data['nome'];
+        // $beer->tipo=$data['tipo'];
+        // $beer->paese=$data['paese'];
+        // $beer->regione=$data['regione'];
+        // $beer->gradazione_alcolica=$data['gradazione_alcolica'];
+        // $beer->descrizione=$data['descrizione'];
         
         // salva $beer nel database
         $beer->save();
@@ -108,13 +111,14 @@ class BeerController extends Controller
      */
     public function update(Request $request, Beer $beer)
     {   
+        $validatedData = $request->validate($this -> beerValidator);
         $data = $request->all();
 
-        dd($data);
-        // $data = $request->all();
         // dd($data);
-        // $beer->update($data);
-        // return redirect()->route('beers.index');
+        $data = $request->all();
+        
+        $beer->update($data);
+        return redirect()->route('beers.index');
     }
 
     /**
@@ -125,7 +129,6 @@ class BeerController extends Controller
      */
     public function destroy(Beer $beer)
     {   
-        dd($beer);
         $beer->delete();
 
         return redirect()->route('beers.index');

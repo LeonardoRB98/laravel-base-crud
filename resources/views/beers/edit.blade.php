@@ -5,6 +5,15 @@
 @endsection
 
 @section('main-content')
+    @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     <form action="{{ route('beers.update', $beer) }}" method="POST">
         @method('PUT')
         @csrf
@@ -22,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="regione">Regione</label>
-            <input type="text" name="regione" class="form-control"  placeholder="{{$beer->regione}}">
+            <input type="text" name="regione" class="form-control" value="{{$beer->regione}}" placeholder="">
         </div>
         <div class="form-group">
             <label for="gradazione alcolica">Gradazione alcolica</label>
@@ -34,6 +43,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Salva modifiche</button>
     </form>
+    <a href="{{ route('beers.index') }}" class="btn btn-secondary mt-3">Torna all'elenco</a>
 @endsection
 
 @section('footer-section')
